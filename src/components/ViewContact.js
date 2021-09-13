@@ -5,9 +5,11 @@ import {
   TableCell,
   TableRow,
 } from "@material-ui/core";
-import React from "react";
+import { list } from "./AddContact";
+import React, { useContext } from "react";
 
-const ViewContact = ({ contactList, removeContact, editContact }) => {
+const ViewContact = () => {
+  let { contactList, removeContact, editContact } = useContext(list);
   let serialNumber = 0;
 
   contactList = contactList.sort((firstRow, secondRow) =>

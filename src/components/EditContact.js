@@ -1,32 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { list } from "./AddContact";
 
-const EditContact = (props) => {
-  const { currentContact, updateContact, setShow } = props;
-  const [person, setPerson] = useState(currentContact);
-
-  useEffect(() => {
-    setPerson(currentContact);
-  }, [currentContact]);
+const EditContact = () => {
+  const { person, updateContact, setShow } = useContext(list);
+  const [user, setUser] = useState(person);
 
   const hanldeChange = (event) => {
     const { name, value } = event.target;
-
-    setPerson({ ...person, [name]: value });
+    setUser({ ...user, [name]: value });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!person.name) {
+    if (!user.name) {
       alert("Please Enter Name");
-    } else if (!person.number) {
+    } else if (!user.number) {
       alert("Please Enter Mobile Numer");
-    } else if (isNaN(person.number)) {
+    } else if (isNaN(user.number)) {
       alert("Please Enter Valid Mobile Number");
-    } else if (!person.email) {
+    } else if (!user.email) {
       alert("Please Enter Email");
     } else {
-      person.id = new Date().getTime().toString();
-      updateContact(person);
+      user.id = new Date().getTime().toString();
+      updateContact(user);
     }
   };
   return (
@@ -39,7 +35,7 @@ const EditContact = (props) => {
             type="text"
             name="name"
             id="name"
-            value={person.name}
+            value={user.name}
             onChange={hanldeChange}
           />
         </div>
@@ -50,7 +46,7 @@ const EditContact = (props) => {
             type="text"
             name="number"
             id="number"
-            value={person.number}
+            value={user.number}
             onChange={hanldeChange}
           />
         </div>
@@ -61,7 +57,7 @@ const EditContact = (props) => {
             type="text"
             name="email"
             id="email"
-            value={person.email}
+            value={user.email}
             onChange={hanldeChange}
           />
         </div>
