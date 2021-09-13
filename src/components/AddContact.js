@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import ViewContact from "./ViewContact";
 import EditContact from "./EditContact";
 import { contactLists } from "./Data";
+
+export const list = createContext();
 
 const AddContact = () => {
   const [person, setPerson] = useState({
@@ -62,18 +64,24 @@ const AddContact = () => {
 
   return (
     <>
-      <article>
+      <list.Provider
+        value={{
+          person,
+          contactList,
+          setPerson,
+          updateContact,
+          setShow,
+          removeContact,
+          editContact,
+        }}
+      >
         <h1 className="text">
           <b>
             <u>Please fill your details</u>
           </b>
         </h1>
         {show.edit ? (
-          <EditContact
-            currentContact={person}
-            updateContact={updateContact}
-            setShow={setShow}
-          />
+          <EditContact />
         ) : (
           <div>
             <form className="form" action="">
@@ -122,14 +130,8 @@ const AddContact = () => {
             </form>
           </div>
         )}
-        {show.view && (
-          <ViewContact
-            contactList={contactList}
-            removeContact={removeContact}
-            editContact={editContact}
-          />
-        )}
-      </article>
+        {show.view && <ViewContact />}
+      </list.Provider>
     </>
   );
 };
