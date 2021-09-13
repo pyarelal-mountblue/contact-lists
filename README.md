@@ -37,7 +37,7 @@ Please [click here](https://contact-lists.netlify.app/ "Contact Lists") to view 
     ```
 
   - ### Step 5 :-
-    Paste the url in the browser to view this project.
-    ```http
+    Paste the URL in the browser to view this project.
+    ```HTTP
     http://localhost:3000/
     ```
